@@ -1,0 +1,55 @@
+h1, .weather, input, #searchButton, .topReadings, .templates {
+	position: relative;
+	/*border: 1px solid black;*/
+}
+html {
+	display: block;
+	background-image: url(cloud.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	
+}
+
+h1 {
+	text-align: center;
+	font-size: 5em;
+}
+
+.weather {
+	margin: 0 auto;
+	width: 50%;
+}
+
+
+input:first-child {
+	margin: 0 auto;
+	width: 82%;
+}
+
+#submitButton {
+	width: 15%;	
+}
+
+.templates {
+	display: block;
+	border: 1px solid black;
+	margin: 0 auto;
+	margin-top: 50px;
+	height: 40%;
+	width: 75%;
+}
+
+.weatherForecast {
+	border: 1px solid black;
+	float: left;
+	margin-top: 5px;
+	
+	width: 19%;
+	height: 100px;
+}
+
+/*
+#hidden {
+	display: none;
+}
+*/
