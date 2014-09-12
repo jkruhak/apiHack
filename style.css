@@ -1,13 +1,14 @@
-h1, .weather, input, #searchButton, .topReadings, .templates {
+html, h1, .weather, input, #searchButton, .topReadings, .templates {
 	position: relative;
 	/*border: 1px solid black;*/
 }
 html {
-	display: block;
-	background-image: url(cloud.jpg);
+	background-image: url(cloud.jpg) ;
 	background-repeat: no-repeat;
 	background-size: cover;
-	
+	width: 100%;
+	min-height: 100%;
+	background-position: 0 0;
 }
 
 h1 {
@@ -20,14 +21,13 @@ h1 {
 	width: 50%;
 }
 
-
 input:first-child {
 	margin: 0 auto;
 	width: 82%;
 }
 
 #submitButton {
-	width: 15%;	
+	width: 60px;	
 }
 
 .templates {
@@ -35,8 +35,15 @@ input:first-child {
 	border: 1px solid black;
 	margin: 0 auto;
 	margin-top: 50px;
-	height: 40%;
+	height: 207px;
 	width: 75%;
+}
+
+#currentWeather {
+	border: 1px solid black;
+	margin: 0 auto;
+	width: 50%;
+	height: 100px;
 }
 
 .weatherForecast {
@@ -48,8 +55,6 @@ input:first-child {
 	height: 100px;
 }
 
-/*
-#hidden {
+.hidden {
 	display: none;
 }
-*/
