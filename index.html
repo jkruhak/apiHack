@@ -2,27 +2,41 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Weather</title>
+	<title>Weather Station</title>
 
 	<link rel="stylesheet" href="style.css">
+
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="script.js"></script>
 </head>
 <body>
 
 	<header>
-		<h1>Weather</h1>
+		<h1>Weather Station</h1>
 	</header>
 
 	<section>
 	
 		<form class="weather" onsubmit="return false;">
-			<input type="text" placeholder='Enter city name and country code, e.g., London, UK' name="tags" autofocus required>
+			<input type="text" placeholder='Enter city name and country code, e.g., London, UK' name="tags" id="tags" autofocus required>
 			<input type="submit" id="submitButton" value="Submit">
 		</form>
 
+		<div class="results-container">
+			<div class="search-results"></div>
+			<div class="results">
+		</div>
+
 		<div class="templates hidden">
 			<dl id="currentWeather">
+				<dt>Temperature:</dt>
+					<dd class="temp"></dd>
+				<dt>Sky:</dt>
+					<dd class="sky"></dd>
+				<dt>Description:</dt>
+					<dd class="description"></dd>
 				<dt></dt>
-					<dd class=""></dd>
+					<dd class="icon"></dd>
 			</dl>
 
 			<dl class="weatherForecast">
