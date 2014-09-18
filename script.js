@@ -1,14 +1,14 @@
 /*--- show current weather in template ---*/
-var showCurrentWeather = function(current) {
-	var cityWeather = $(".templates #currentWeather").clone();
+var showCurrentWeather = function(currentWeather) {
+	var result = $(".templates .currentWeather").clone();
 
-	//show current temperature
-	var currentTemp = cityWeather.find(".temp");
-	currentTemp.text(current.main);
+	/*--- Get city name ---*/
+	var locationName = result.find(".name");
+	locationName.text(currentWeather.name);
 
-	console.log(current.main);
+	console.log(currentWeather.name);
 
-	return cityWeather;
+	return result;
 };
 
 /*--- Get current weather ---*/
@@ -24,11 +24,9 @@ var getCurrentWeather = function(cityName) {
 		dataType: "json"
 		})		
 		.done(function(result) {
-			//var weatherResult = showCurrentWeather(data.tagged, data.main.length);
 
-			$(".search-results").html(showCurrentWeather);
+			$(".search-results").append(showCurrentWeather);
 
-			//$(".search-results").append(showCurrentWeather);
 		});
 };	
 
@@ -44,6 +42,7 @@ $(document).ready(function() {
 		var cityName = $(this).find("input[name='tags']").val();
 		
 		getCurrentWeather(cityName);
+
 		//getForecast();
 	});
 });

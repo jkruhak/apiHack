@@ -18,7 +18,7 @@
 	<section>
 	
 		<form class="weather" onsubmit="return false;">
-			<input type="text" placeholder='Enter city name and country code, e.g., London, UK' name="tags" id="tags" autofocus required>
+			<input type="text" placeholder='Enter city name and country code, e.g., London,UK' name="tags" id="tags" autofocus required>
 			<input type="submit" id="submitButton" value="Submit">
 		</form>
 
@@ -28,7 +28,9 @@
 		</div>
 
 		<div class="templates hidden">
-			<dl id="currentWeather">
+			<dl class="result currentWeather">
+				<dt>City Name:</dt>
+					<dd class="name"></dd>
 				<dt>Temperature:</dt>
 					<dd class="temp"></dd>
 				<dt>Sky:</dt>
@@ -39,7 +41,7 @@
 					<dd class="icon"></dd>
 			</dl>
 
-			<dl class="weatherForecast">
+			<dl class="result weatherForecast">
 				<dt></dt>
 					<dd class=""></dd>
 			</dl>
