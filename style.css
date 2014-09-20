@@ -52,6 +52,14 @@ img {
 	font-size: 1.2em;
 }
 
+.name {
+	font-size: 1.5em;
+}
+
+.name, .icon {
+	text-align: center;
+}
+
 .weatherForecast {
 	/*border: 1px solid black;*/
 	float: left;
