@@ -82,7 +82,7 @@ var getWeatherTomorrow = function(cityName) {
 
 var showWeatherTomorrow = function(tomorrowResult) {
 	var template = $(".templates .weatherTomorrow");
-	var nextDay = tomorrowResult.list[2];
+	var nextDay = tomorrowResult.list[1];
 
 	//get tomorrow's date	
 	var date = new Date(1000*nextDay["dt"]);

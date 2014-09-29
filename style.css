@@ -53,7 +53,7 @@ input:first-child {
 
 .result {
 	padding: 5px;
-	margin: 0 auto 1em auto;
+	margin: 0 auto;
 	text-align: left;
 	width: 500px;
 	height: 300px;
@@ -72,12 +72,16 @@ input:first-child {
 
 .weatherTomorrow {
 	float: left;
-	margin-top: 25px;
+	
 	margin-left: 60px;
-	width: 19%;
+	width: 30%;
 	height: 300px;
 }
 
 .hidden {
 	display: none;
+}
+
+h3 {
+	margin-top: 50px;
 }
