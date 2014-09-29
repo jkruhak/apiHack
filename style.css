@@ -1,7 +1,9 @@
-html, h1, .weather, input, #searchButton, .topReadings, .templates {
+html, h1, .weather, input, #submitButton, img, .templates,
+.currentWeather, .weatherTomorrow {
 	position: relative;
 	/*border: 1px solid black;*/
 }
+
 html {
 	background-image: url(cloud.jpg) ;
 	background-repeat: no-repeat;
@@ -18,37 +20,49 @@ h1 {
 
 .weather {
 	margin: 0 auto;
-	width: 50%;
+	width: 25%;
 }
 
 input:first-child {
 	margin: 0 auto;
-	width: 82%;
+	width: 75%;
 }
-
+/*
 #submitButton {
 	width: 60px;	
-}
+}*/
 
-img {
+.currentWeather img {
 	width: 100px;
 	height: 100px;
 }
 
+.weatherForecast img {
+	width: 50px;
+	height: 50px;
+	text-align: left;
+}
+
 .templates {
 	display: block;
-	/*border: 1px solid black;*/
 	margin: 0 auto;
 	margin-top: 50px;
-	height: 207px;
-	width: 75%;
+	height: 330px;
+	width: 45%;
+}
+
+.result {
+	padding: 5px;
+	margin: 0 auto 1em auto;
+	text-align: left;
+	width: 500px;
+	height: 300px;
 }
 
 .currentWeather {
-	/*border: 1px solid black;*/
 	margin: 0 auto;
-	width: 50%;
-	height: 100px;
+	width: 40%;
+	height: 319px;
 	font-size: 1.2em;
 }
 
@@ -56,19 +70,14 @@ img {
 	font-size: 1.5em;
 }
 
-.name, .icon {
-	text-align: center;
+.weatherTomorrow {
+	float: left;
+	margin-top: 25px;
+	margin-left: 60px;
+	width: 19%;
+	height: 300px;
 }
 
-.weatherForecast {
-	/*border: 1px solid black;*/
-	float: left;
-	margin-top: 5px;
-	
-	width: 19%;
-	height: 100px;
-}
-/*
 .hidden {
 	display: none;
-}*/
+}
