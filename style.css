@@ -62,6 +62,7 @@ input:first-child {
 
 .currentWeather {
 	margin: 0 auto;
+	margin-top: 25px;
 	width: 20%;
 	height: 319px;
 	font-size: 1.2em;

@@ -14,11 +14,11 @@ var getCurrentWeather = function(cityName) {
 			showForecast(weatherResult);
 		},
 		error: function(jqXHR, textStatus, errorThrown) {
-			console.log(textStatus, errorThrown);
+			var errorElem = showError(error);
+			$(".search-results").append(errorElem);
 		},
-		complete: function(xhr, message) {
-			console.log("Get Weather request is a " + message);
-        	
+		complete: function(xhr, textStatus) {
+			console.log("Get Weather request is a " + textStatus);
     	}
 	});		
 };
@@ -60,8 +60,6 @@ var showCurrentWeather = function(weatherResult) {
 	weatherDescr.text(currentDay.weather[0].description);
 };
 
-
-
 var showForecast = function(weatherResult) {
 	for(var i = 1; i < 6; i++) {
 		var template = $(".templates .weatherTomorrow").clone().appendTo(".results");
@@ -96,7 +94,12 @@ var showForecast = function(weatherResult) {
 		weatherDescr.html(nextDay.weather[0].description);
 	}
 	return template;
+};
 
+var showError = function(error) {
+	var errorElem = $(".templates .error").clone();
+	var errorText = "<p>" + error + "</p>";
+	errorElem.append(errorText);
 };
 
 /*--- jQuery ---*/
