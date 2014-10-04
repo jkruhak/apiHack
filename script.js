@@ -2,7 +2,7 @@ var monthNames = ["January", "February", "March", "April", "May", "June", "July"
 
 var getCurrentWeather = function(cityName) {
 	var result = $.ajax({
-		url: "http://api.openweathermap.org/data/2.5/weather?q="+cityName+"&units=metric&APPID=7568c4802a197a31911e92da53e2a12c",
+		url: "http://api.openweathermap.org/data/2.5/forecast/daily?q="+cityName+"&mode=json&units=metric&cnt=7&APPID=7568c4802a197a31911e92da53e2a12c",
 		data: {
 			tagged: cityName,
 			site: "openweathermap"
@@ -11,23 +11,26 @@ var getCurrentWeather = function(cityName) {
 		dataType: "json",
 		success: function(weatherResult) {
 			showCurrentWeather(weatherResult);
+			showForecast(weatherResult);
 		},
-		error: function(xhr, status, errorThrown) {
-			console.log("Error: " + errorThrown);
-	        console.log("Status: " + status);
-	        console.dir(xhr);
+		error: function(jqXHR, textStatus, errorThrown) {
+			console.log(textStatus, errorThrown);
 		},
-		complete: function(xhr, status) {
-        	console.log("Request is a " + status);
+		complete: function(xhr, message) {
+			console.log("Get Weather request is a " + message);
+        	
     	}
 	});		
 };
 
 var showCurrentWeather = function(weatherResult) {
-	var template = $(".templates .currentWeather");
+	//copy Current Weather template
+	var template = $(".templates .currentWeather").clone().appendTo(".search-results");
+
+	var currentDay = weatherResult.list[0];
 
 	//get current date
-	var date = new Date(1000*weatherResult.dt);
+	var date = new Date(1000*currentDay["dt"]);
 	var day = date.getDate();
 	var month = monthNames[date.getMonth()];
 
@@ -36,80 +39,64 @@ var showCurrentWeather = function(weatherResult) {
 
 	//get current weather icon
 	var weatherIcon = template.find(".icon");
-	weatherIcon.html("<img src='http://api.openweathermap.org/data/2.5/img/w/"+weatherResult.weather[0].icon+"'>");
+	weatherIcon.html("<img src='http://api.openweathermap.org/data/2.5/img/w/"+currentDay.weather[0].icon+"'>");
 	
 	//get city name and country
 	var searchInput = template.find(".name");
-	searchInput.text(weatherResult.name + ", " + weatherResult.sys.country);
+	searchInput.text(weatherResult.city.name + ", " + weatherResult.city.country);
 	
 	//get current temperature
-	var currentTemp = Math.floor(weatherResult.main.temp);
+	var currentTemp = Math.floor(currentDay.temp.day);
 	var locationTemp = template.find(".temp");
 	locationTemp.html(currentTemp + "&#176; C");
 	
 	//get humidity
 	var humid = template.find(".humidity");
-	humid.html(weatherResult.main.humidity + "&#37;");
+	humid.html(currentDay.humidity + "&#37;");
 	
 	
 	//get current weather description
 	var weatherDescr = template.find(".description");
-	weatherDescr.text(weatherResult.weather[0].description);
+	weatherDescr.text(currentDay.weather[0].description);
 };
 
-var getWeatherTomorrow = function(cityName) {
-	var result = $.ajax({
-		url: "http://api.openweathermap.org/data/2.5/forecast/daily?q="+cityName+"&mode=json&units=metric&cnt=5",
-		data: {
-			tagged: cityName,
-			site: "openweathermap"
-		},
-		type: "GET",
-		dataType: "json",
-		success: function(tomorrowResult) {
-			showWeatherTomorrow(tomorrowResult);
-		},
-		error: function(xhr, status, errorThrown) {
-			console.log("Error: " + errorThrown);
-	        console.log("Status: " + status);
-	        console.dir(xhr);
-		},
-		complete: function(xhr, status) {
-        	console.log("Request is a " + status);
-    	}
-	});
-};
 
-var showWeatherTomorrow = function(tomorrowResult) {
-	var template = $(".templates .weatherTomorrow");
-	var nextDay = tomorrowResult.list[1];
 
-	//get tomorrow's date	
-	var date = new Date(1000*nextDay["dt"]);
-	var day = date.getDate();
-	var month = monthNames[date.getMonth()];
+var showForecast = function(weatherResult) {
+	for(var i = 1; i < 6; i++) {
+		var template = $(".templates .weatherTomorrow").clone().appendTo(".results");
+		
+		var nextDay = weatherResult.list[i];
 
-	template.find(".date").text(month.toString() + " " + day.toString());
+		//get tomorrow's date	
+		var date = new Date(1000*nextDay["dt"]);
+		var day = date.getDate();
+		var month = monthNames[date.getMonth()];
 
-	//get tomorrow's weather icon
-	var weatherIcon = template.find(".icon");
-	weatherIcon.html("<img src='http://api.openweathermap.org/data/2.5/img/w/"+nextDay.weather[0].icon+"'>");
+		template.find(".date").text(month.toString() + " " + day.toString());
 
-	//get minimum temperature
-	var minimumTemp = Math.floor(nextDay.temp.min);
-	template.find(".minTemp").html(minimumTemp + "&#176; C");
+		//get tomorrow's weather icon
+		var weatherIcon = template.find(".icon");
+		weatherIcon.html("<img src='http://api.openweathermap.org/data/2.5/img/w/"+nextDay.weather[0].icon+"'>");
+	
+		//get minimum temperature
+		var minimumTemp = Math.floor(nextDay.temp.min);
+		template.find(".minTemp").html(minimumTemp + "&#176; C");
 
-	//get maximum temperature
-	var maximumTemp = Math.floor(nextDay.temp.max);
-	template.find(".maxTemp").html(maximumTemp + "&#176; C");
+		//get maximum temperature
+		var maximumTemp = Math.floor(nextDay.temp.max);
+		template.find(".maxTemp").html(maximumTemp + "&#176; C");
 
-	//get humidity
-	var humid = template.find(".humidity");
-	humid.html(nextDay.humidity + "&#37;");
+		//get humidity
+		var humid = template.find(".humidity");
+		humid.html(nextDay.humidity + "&#37;");
 
-	//get tomorrow's weather description
-	var weatherDescr = template.find(".description");
-	weatherDescr.html(nextDay.weather[0].description);
+		//get tomorrow's weather description
+		var weatherDescr = template.find(".description");
+		weatherDescr.html(nextDay.weather[0].description);
+	}
+	return template;
+
 };
 
 /*--- jQuery ---*/
@@ -117,8 +104,8 @@ $(document).ready(function() {
 
 	$(".weather").submit(function(event) {
 		var cityName = $(this).find("input[name='tags']").val();
-		$(".hidden").show();
+		$(".search-results").html("");
+		$(".results").html("");
 		getCurrentWeather(cityName);
-		getWeatherTomorrow(cityName);
 	});
 });
