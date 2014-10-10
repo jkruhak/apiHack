@@ -13,7 +13,16 @@ html {
 	background-position: 0 0;
 }
 
-section {
+ul {
+	list-style: none;
+}
+
+li {
+	margin: 0 0 10px 0;
+	text-align: center;
+}
+
+#main {
 	margin: 0 auto;
 	width: 1200px;
 }
@@ -64,7 +73,7 @@ input:first-child {
 	margin: 0 auto;
 	margin-top: 25px;
 	width: 20%;
-	height: 319px;
+	height: 290px;
 	font-size: 1.2em;
 }
 
@@ -77,9 +86,9 @@ input:first-child {
 	display: inline-block;
 	margin-right: 20px;	
 	margin-left: 25px;
-	margin-top: 20px;
+	margin-top: 40px;
 	width: 15%;
-	height: 300px;
+	height: 215px;
 }
 
 .hidden {

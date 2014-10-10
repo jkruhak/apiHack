@@ -14,7 +14,7 @@ var getCurrentWeather = function(cityName) {
 			showForecast(weatherResult);
 		},
 		error: function(jqXHR, textStatus, errorThrown) {
-			var errorElem = showError(error);
+			var errorElem = showError(errorThrown);
 			$(".search-results").append(errorElem);
 		},
 		complete: function(xhr, textStatus) {
@@ -35,7 +35,7 @@ var showCurrentWeather = function(weatherResult) {
 	var month = monthNames[date.getMonth()];
 
 	var currentDate = template.find(".date");
-	currentDate.text(month.toString() + " " + day.toString());
+	currentDate.append(month.toString() + " " + day.toString());
 
 	//get current weather icon
 	var weatherIcon = template.find(".icon");
@@ -43,21 +43,21 @@ var showCurrentWeather = function(weatherResult) {
 	
 	//get city name and country
 	var searchInput = template.find(".name");
-	searchInput.text(weatherResult.city.name + ", " + weatherResult.city.country);
+	searchInput.append(weatherResult.city.name + ", " + weatherResult.city.country);
 	
 	//get current temperature
 	var currentTemp = Math.floor(currentDay.temp.day);
 	var locationTemp = template.find(".temp");
-	locationTemp.html(currentTemp + "&#176; C");
+	locationTemp.append(currentTemp + "&#176; C");
 	
 	//get humidity
 	var humid = template.find(".humidity");
-	humid.html(currentDay.humidity + "&#37;");
+	humid.append(currentDay.humidity + "&#37;");
 	
 	
 	//get current weather description
 	var weatherDescr = template.find(".description");
-	weatherDescr.text(currentDay.weather[0].description);
+	weatherDescr.append(currentDay.weather[0].description);
 };
 
 var showForecast = function(weatherResult) {
@@ -71,7 +71,7 @@ var showForecast = function(weatherResult) {
 		var day = date.getDate();
 		var month = monthNames[date.getMonth()];
 
-		template.find(".date").text(month.toString() + " " + day.toString());
+		template.find(".date").append(month.toString() + " " + day.toString());
 
 		//get tomorrow's weather icon
 		var weatherIcon = template.find(".icon");
@@ -79,26 +79,26 @@ var showForecast = function(weatherResult) {
 	
 		//get minimum temperature
 		var minimumTemp = Math.floor(nextDay.temp.min);
-		template.find(".minTemp").html(minimumTemp + "&#176; C");
+		template.find(".minTemp").append(minimumTemp + "&#176; C");
 
 		//get maximum temperature
 		var maximumTemp = Math.floor(nextDay.temp.max);
-		template.find(".maxTemp").html(maximumTemp + "&#176; C");
+		template.find(".maxTemp").append(maximumTemp + "&#176; C");
 
 		//get humidity
 		var humid = template.find(".humidity");
-		humid.html(nextDay.humidity + "&#37;");
+		humid.append(nextDay.humidity + "&#37;");
 
 		//get tomorrow's weather description
 		var weatherDescr = template.find(".description");
-		weatherDescr.html(nextDay.weather[0].description);
+		weatherDescr.append(nextDay.weather[0].description);
 	}
 	return template;
 };
 
-var showError = function(error) {
+var showError = function(errorThrown) {
 	var errorElem = $(".templates .error").clone();
-	var errorText = "<p>" + error + "</p>";
+	var errorText = "<p>" + errorThrown + "</p>";
 	errorElem.append(errorText);
 };
 
